@@ -1,0 +1,13 @@
+java -Xms256m -Xmx1g -cp build/Task03 Attendance
+Unique students: 2
+
+java -Xms256m -Xmx1g -cp build/Task03 AttendanceExperiment
+Q3 Equality and hashing
+Supplied code before TODO execution: Unique students: 3
+Predictions before tests: same-reference scans size 2; distinct-identity duplicate scans size 3.
+Mutation A->B: size remains 1 but contains and remove fail; reinsertion can make size 2.
+Observed in all 7 trials: reused-reference=2; distinct-instances=3; corrected=2.
+Observed mutation: size=1, contains=false, remove=false; reinsertion size=2.
+PASS: reflexivity, symmetry, transitivity, null/type rejection and equal-hash checks.
+PASS: TreeSet by regNo and HashMap keyed by regNo both retain 2 students.
+

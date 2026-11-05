@@ -15,7 +15,9 @@ public class EvidenceViewer {
         Path transcript = Path.of(args[0]).toAbsolutePath();
         var lines = Files.readAllLines(transcript);
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Assignment 2 - " + transcript.getParent().getFileName() + " - Executed output");
+            int selectedPage = args.length > 1 ? Integer.parseInt(args[1]) : 1;
+            JFrame frame = new JFrame("Assignment 2 - " + transcript.getParent().getFileName()
+                    + " - Executed output - Page " + selectedPage);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             JLabel heading = new JLabel("Actual saved stdout | " + transcript.getParent().getFileName() + " | execution.txt");
             heading.setFont(new Font("SansSerif", Font.BOLD, 17));
@@ -29,6 +31,7 @@ public class EvidenceViewer {
                 area.setBorder(BorderFactory.createEmptyBorder(12, 15, 12, 15));
                 pages.addTab("Page " + (start / 24 + 1), new JScrollPane(area));
             }
+            pages.setSelectedIndex(selectedPage - 1);
             frame.add(pages, BorderLayout.CENTER);
             frame.setSize(1180, 760);
             frame.setLocationRelativeTo(null);
