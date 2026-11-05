@@ -4,70 +4,36 @@ Name: R SARVESH
 
 Register number: 192521143
 
-Java version used: Oracle JDK 21.0.12.1 on Windows 11, compiled for Java 17.
+Java version: Oracle JDK 21.0.12.1. Every source also compiles with --release 17.
 
-Repository: https://github.com/192521143simats-sketch/CSA09-192521143-Assignment2
+GitHub: https://github.com/192521143simats-sketch/CSA09-192521143-Assignment2
 
-## Submission structure
+## Files
 
-Every task uses the same structure.
+Each Task01 through Task07 folder contains exactly one independent Java source file and one complete output screenshot. Task04 additionally contains input.csv, which its program reads. All other input values and test datasets are embedded in their Java source.
 
-```text
-Task01/ ... Task07/
-    src/            Java source code
-    inputs/         Input data and experiment settings
-    results/        Required measurements, summaries and output data
-    screenshots/    Lossless Full HD output screenshots
+## Run each question
 
-common/Bench.java   Shared measurement code
-tools/              Compile-and-run scripts
-```
+Use JDK 17 or later. From the repository root, enter the task folder and run its source file directly.
 
-Task03 additionally keeps the uncorrected supplied program in `src/before/` and its actual output in `results/before_execution.txt`.
-
-## Compile and run
-
-Install a JDK version 17 or later. No Java libraries or build-tool installation are required. Open PowerShell in the repository root.
-
-Run all tasks, including every supplied Complete the Code program and the uncorrected Q3 program.
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\tools\Run-All.ps1
-```
-
-Run an individual task with the corresponding command.
-
-| Task | Compile and run command | Result of recorded execution |
+| Question | Commands | Result |
 | --- | --- | --- |
-| Q1 | `.\tools\Run-Task.ps1 -Task 1 -Programs TicketExperiment` | All three methods produced equal tickets across three workloads. The four-thread log retained all 4,000 records. |
-| Q2 | `.\tools\Run-Task.ps1 -Task 2 -Programs PlaylistExperiment` | Three playlist sizes tested append, front/middle edits, indexed access, iteration and Up Next. Order and checksum checks passed. |
-| Q3 | `.\tools\Run-Task.ps1 -Task 3 -Programs Attendance,AttendanceExperiment` | The supplied code produced 3 students before correction and 2 afterward. All seven repetitions of the five designed observations matched their predictions. |
-| Q4 | `.\tools\Run-Task.ps1 -Task 4 -Programs InventoryExperiment` | All nine map/size combinations produced correct code-order and addition-order reports. Each map met the declared mean lookup target. |
-| Q5 | `.\tools\Run-Task.ps1 -Task 5 -Programs LeaderboardDemo,RankingExperiment` | The supplied expected ranking matched exactly. Overflow and omitted tie-breaker faults were detected. All three ranking alternatives agreed. |
-| Q6 | `.\tools\Run-Task.ps1 -Task 6 -Programs Triage,TriageExperiment` | The supplied treatment order and eight-patient hand order matched. FIFO ties, growth, aging and both alternative queues passed their checks. |
-| Q7 | `.\tools\Run-Task.ps1 -Task 7 -Programs RankingRedesign` | Cached rankings matched the original for every request. Unchanged data reduced 30 sorts to 1, and additions invalidated the cache correctly. |
+| Q1 | cd Task01, then java Task01.java | Three ticket-building methods agree. Three workloads and the shared-log check complete successfully. |
+| Q2 | cd Task02, then java Task02.java | Playlist operations at three sizes and Up Next checks complete successfully. |
+| Q3 | cd Task03, then java Task03.java | Before correction gives 3 students. After correction gives 2. Equality, mutation and alternative-collection checks pass. |
+| Q4 | cd Task04, then java Task04.java | Reads input.csv. Both report orders match for all maps at three sizes. |
+| Q5 | cd Task05, then java Task05.java | The expected ranking matches. Comparator faults are detected, and ranking alternatives agree. |
+| Q6 | cd Task06, then java Task06.java | The expected triage order, FIFO ties, growth, aging and alternative-queue checks pass. |
+| Q7 | cd Task07, then java Task07.java | Cached rankings agree with the original, and additions invalidate the cache. |
 
-For a manual compile-and-run example, run Q5 as follows.
+Run each pair of commands from the repository root. To compile explicitly, enter the task folder and use javac -d ../build/Task01 Task01.java, then java -cp ../build/Task01 Task01. Substitute the corresponding task number for the other questions.
 
-```powershell
-New-Item -ItemType Directory -Force build\Task05 | Out-Null
-javac --release 17 -d build\Task05 common\Bench.java Task05\src\*.java
-Push-Location Task05
-java -Xms256m -Xmx1g -cp ..\build\Task05 LeaderboardDemo
-java -Xms256m -Xmx1g -cp ..\build\Task05 RankingExperiment
-Pop-Location
-```
+Each source contains its required helper classes, completed supplied-code examples and experiments. No shared source file or third-party Java dependency is required. Q3 includes both the uncorrected and corrected versions in its single source file using distinct internal class names.
 
-All other tasks use the same pattern with their task number and entry points from the table. Run from the task folder so that `inputs/` and `results/` resolve correctly. Q3's before-correction example has a separate compilation directory because it intentionally uses the same class names as the corrected program. Run-All.ps1 handles that separation.
+## Measurements and screenshots
 
-## Experimental evidence
+Output.png in each task folder is one genuine screenshot showing that task's complete executed output. The timing experiments use three warmup batches and seven measured trials. Q3 repeats its correctness observations seven times.
 
-The timing experiments use three warmup batches followed by seven measured trials. `results/raw.csv` retains each trial, elapsed nanoseconds, operation count, checksum and heap readings. `results/summary.csv` records mean, sample standard deviation, minimum and maximum. Q3 instead records the predicted and observed outcomes of its correctness experiments.
+Programs save detailed raw trials, summaries and supplementary output locally under docs/evidence/TaskNN, outside the task folders. This directory is ignored by Git. Use -Dassignment.evidence=PATH before the Java source filename to choose a different local evidence directory.
 
-Operation counts and additional order/correctness checks are retained where required by the question. The submission contains 819 measured timing trials and 10 lossless PNG screenshots across Q1-Q7. Each screenshot is a native 1920 × 1080 capture of actual saved Java output displayed in a labelled viewer, with large Consolas text and numbered pages. Every output line is included across the pages. The images are captured at their original resolution without resizing or JPEG compression.
-
-The assignment explicitly requires raw experimental data and comparison tables, so the CSV measurement files remain in Git alongside the screenshots. Full stdout transcripts are retained locally and regenerated by the run scripts. The Q3 before-correction output remains in the repository because its experiment reads that file.
-
-Rerunning the experiments regenerates result files. Timing depends on the JVM, garbage collection and system activity, so a new run can produce different values. Heap differences do not measure total allocated bytes. Use the repeated trials and operation counts when interpreting results.
-
-The Git history retains a separate completion commit for each task. The DOCX/PDF reports, answer drafts, report-authoring tools, compiler logs, full stdout transcripts and verification helpers are kept locally and excluded from this submission repository. Compiled classes and temporary build files are also ignored.
+The Word/PDF reports, raw evidence, previous screenshots, report-authoring scripts and compiler logs are kept locally. New timings can differ due to JVM compilation, garbage collection and system activity.
