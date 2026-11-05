@@ -27,6 +27,8 @@ public class EvidenceViewer {
             for (int start = 0; start < lines.size(); start += 24) {
                 JTextArea area = new JTextArea(String.join("\n", lines.subList(start, Math.min(start + 24, lines.size()))));
                 area.setEditable(false);
+                area.setLineWrap(true);
+                area.setWrapStyleWord(true);
                 area.setFont(new Font("Monospaced", Font.PLAIN, 16));
                 area.setBorder(BorderFactory.createEmptyBorder(12, 15, 12, 15));
                 pages.addTab("Page " + (start / 24 + 1), new JScrollPane(area));
