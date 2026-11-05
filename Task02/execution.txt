@@ -1,0 +1,44 @@
+java -Xms256m -Xmx1g -cp build/Task02 PlaylistExperiment
+Q2 Playlist operations
+Prediction: indexed access favours ArrayList; front edits favour LinkedList; iteration is linear for both.
+Java 21.0.12.1 | Windows 11 | amd64
+Warmups=3; measured trials=7; heap is sampled without forced GC.
+n=100    ArrayList       append           mean=      90.29 ns/op sd=     54.74
+n=100    ArrayList       front-edit-pair  mean=     451.71 ns/op sd=    622.80
+n=100    ArrayList       middle-edit-pair mean=     398.31 ns/op sd=    341.65
+n=100    ArrayList       get-k            mean=      67.29 ns/op sd=      3.85
+n=100    ArrayList       iterate          mean=      98.71 ns/op sd=     10.44
+n=100    LinkedList      append           mean=     104.46 ns/op sd=    100.00
+n=100    LinkedList      front-edit-pair  mean=     272.37 ns/op sd=    152.22
+n=100    LinkedList      middle-edit-pair mean=     449.97 ns/op sd=    227.63
+n=100    LinkedList      get-k            mean=     210.23 ns/op sd=    149.68
+n=100    LinkedList      iterate          mean=     126.86 ns/op sd=     56.68
+n=100    ArrayDeque      up-next-cycle    mean=     238.29 ns/op sd=     42.09
+n=100    LinkedList      up-next-cycle    mean=    1504.26 ns/op sd=   2810.42
+n=10000  ArrayList       append           mean=      76.54 ns/op sd=     20.20
+n=10000  ArrayList       front-edit-pair  mean=    1159.34 ns/op sd=    449.71
+n=10000  ArrayList       middle-edit-pair mean=     649.89 ns/op sd=    273.62
+n=10000  ArrayList       get-k            mean=      78.86 ns/op sd=     31.65
+n=10000  ArrayList       iterate          mean=      48.37 ns/op sd=     32.74
+n=10000  LinkedList      append           mean=      44.91 ns/op sd=      3.11
+n=10000  LinkedList      front-edit-pair  mean=      97.97 ns/op sd=      5.50
+n=10000  LinkedList      middle-edit-pair mean=   17450.94 ns/op sd=   2855.21
+n=10000  LinkedList      get-k            mean=    3736.77 ns/op sd=    421.95
+n=10000  LinkedList      iterate          mean=      20.88 ns/op sd=      0.64
+n=10000  ArrayDeque      up-next-cycle    mean=     388.74 ns/op sd=     71.24
+n=10000  LinkedList      up-next-cycle    mean=    1040.14 ns/op sd=   1900.60
+n=100000 ArrayList       append           mean=     908.09 ns/op sd=    210.37
+n=100000 ArrayList       front-edit-pair  mean=   17876.46 ns/op sd=   2571.31
+n=100000 ArrayList       middle-edit-pair mean=   11024.03 ns/op sd=   3396.98
+n=100000 ArrayList       get-k            mean=     124.40 ns/op sd=     43.97
+n=100000 ArrayList       iterate          mean=      33.62 ns/op sd=     33.28
+n=100000 LinkedList      append           mean=      81.77 ns/op sd=     59.67
+n=100000 LinkedList      front-edit-pair  mean=      35.26 ns/op sd=      6.44
+n=100000 LinkedList      middle-edit-pair mean=  207474.60 ns/op sd=  87160.25
+n=100000 LinkedList      get-k            mean=   42675.83 ns/op sd=   6742.64
+n=100000 LinkedList      iterate          mean=      15.06 ns/op sd=      4.38
+n=100000 ArrayDeque      up-next-cycle    mean=     851.91 ns/op sd=    535.09
+n=100000 LinkedList      up-next-cycle    mean=     152.80 ns/op sd=      5.19
+PASS: empty-playlist invalid index rejected.
+PASS: edit pairs restore order; iteration checksums match; Up Next size preserved.
+

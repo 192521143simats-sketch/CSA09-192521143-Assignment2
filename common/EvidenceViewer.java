@@ -22,12 +22,12 @@ public class EvidenceViewer {
             heading.setBorder(BorderFactory.createEmptyBorder(12, 15, 12, 15));
             frame.add(heading, BorderLayout.NORTH);
             JTabbedPane pages = new JTabbedPane();
-            for (int start = 0; start < lines.size(); start += 29) {
-                JTextArea area = new JTextArea(String.join("\n", lines.subList(start, Math.min(start + 29, lines.size()))));
+            for (int start = 0; start < lines.size(); start += 24) {
+                JTextArea area = new JTextArea(String.join("\n", lines.subList(start, Math.min(start + 24, lines.size()))));
                 area.setEditable(false);
                 area.setFont(new Font("Monospaced", Font.PLAIN, 16));
                 area.setBorder(BorderFactory.createEmptyBorder(12, 15, 12, 15));
-                pages.addTab("Page " + (start / 29 + 1), new JScrollPane(area));
+                pages.addTab("Page " + (start / 24 + 1), new JScrollPane(area));
             }
             frame.add(pages, BorderLayout.CENTER);
             frame.setSize(1180, 760);
