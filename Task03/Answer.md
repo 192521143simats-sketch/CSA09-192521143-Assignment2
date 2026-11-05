@@ -18,6 +18,28 @@ A key's stored entry does not move when the key changes. In this test A and B pr
 
 The corrected supplied class keeps regNo final, compares regNo in equals, and returns regNo.hashCode() in hashCode. The name is deliberately excluded from both because registration determines identity. The supplied class assumes a non-null registration. Production input validation should reject null or blank registrations before construction. The experiments verified reflexivity, symmetry, transitivity, rejection of null and another type, equal hashes for equal registrations, and successful lookup using a new equal object. A different name with the same registration remained equal. Seven repetitions reproduced all predicted sizes in raw.csv.
 
+```java
+class Student {
+    private final String regNo;
+    private final String name;
+    Student(String regNo, String name) {
+        this.regNo = regNo;
+        this.name = name;
+    }
+    @Override public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        return regNo.equals(((Student) o).regNo);
+    }
+    @Override public int hashCode() {
+        return regNo.hashCode();
+    }
+    @Override public String toString() {
+        return regNo + " " + name;
+    }
+}
+```
+
 The alternative solutions were also executed.
 
 ```java

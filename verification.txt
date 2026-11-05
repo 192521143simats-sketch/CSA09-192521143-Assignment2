@@ -1,0 +1,22 @@
+PASS 13 Java source files contain no comments or TODO markers
+PASS Task01 freshly compiled for Java 17
+PASS Task02 freshly compiled for Java 17
+PASS Task03 freshly compiled for Java 17
+PASS Task04 freshly compiled for Java 17
+PASS Task05 freshly compiled for Java 17
+PASS Task06 freshly compiled for Java 17
+PASS Task07 freshly compiled for Java 17
+PASS Attendance fresh execution matches the supplied expected output exactly
+PASS LeaderboardDemo fresh execution matches the supplied expected output exactly
+PASS Triage fresh execution matches the supplied expected output exactly
+PASS Before-correction Attendance independently reproduced Unique students: 3
+PASS Task01 raw trials, summary statistics, checksums and screenshot coverage verified
+PASS Task02 raw trials, summary statistics, checksums and screenshot coverage verified
+PASS Task03 all 35 predicted-size observations match
+PASS Task04 raw trials, summary statistics, checksums and screenshot coverage verified
+PASS Task05 raw trials, summary statistics, checksums and screenshot coverage verified
+PASS Task06 raw trials, summary statistics, checksums and screenshot coverage verified
+PASS Task07 raw trials, summary statistics, checksums and screenshot coverage verified
+PASS Map order checks, ranking fault detection and redesign invalidation counts verified
+PASS Local DOCX and PDF are ignored and absent from Git tracking
+PASS Total evidence verified: 117 timing groups, 819 measured trials, 10 screenshots

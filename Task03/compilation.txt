@@ -26,3 +26,4 @@ C:\Users\mahen\OneDrive\Desktop\SARVESH\simats\SIMATS PROJECT\JAVA\ASSIGNMENT 2\
                 Student third = new Student("192311001", "Another name");
                                     ^
 9 warnings
+Compilation successful with --release 17 and -Xlint:all.

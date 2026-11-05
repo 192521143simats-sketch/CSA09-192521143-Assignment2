@@ -4,6 +4,21 @@ Prediction before implementation. String is immutable. Each loop concatenation m
 
 The three workloads use identical 18-character fields including the newline. The first is one short ticket with 8 fields, batched 2,000 times to improve timing resolution. The second is 10,000 tickets with 50 fields each. The additional workload is 100 long tickets with 200 fields each. fields.txt contains the actual fields, and workloads.csv records ticket counts, field counts and batches. Setup occurs before timing. Each method has three warmup batches and seven recorded trials. A volatile checksum consumes the generated lengths. These are exploratory measurements in one JVM, with fixed method order, rather than a statistically controlled production benchmark.
 
+The three implementations append the same fields and newline separators.
+
+```java
+String text = "";
+for (String field : fields) text = text + field + "\n";
+
+StringBuilder builder = new StringBuilder();
+for (String field : fields) builder.append(field).append('\n');
+String built = builder.toString();
+
+StringBuffer buffer = new StringBuffer();
+for (String field : fields) buffer.append(field).append('\n');
+String buffered = buffer.toString();
+```
+
 | Tickets per workload | Fields | String ns/ticket mean ± SD | StringBuilder ns/ticket mean ± SD | StringBuffer ns/ticket mean ± SD |
 | --- | --- | --- | --- | --- |
 | 1 | 8 | 552.04 ± 489.43 | 864.53 ± 343.00 | 844.03 ± 314.32 |

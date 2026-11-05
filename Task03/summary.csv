@@ -1,0 +1,6 @@
+test,trials,predicted_size,observed_size,all_match
+same-reference,7,2,2,True
+distinct-instances,7,3,3,True
+mutated-key,7,1,1,True
+mutated-reinserted,7,2,2,True
+corrected,7,2,2,True
