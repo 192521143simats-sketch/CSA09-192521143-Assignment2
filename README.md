@@ -34,8 +34,6 @@ Each source contains its required helper classes, completed supplied-code exampl
 
 Output.png in each task folder is one genuine screenshot showing that task's complete executed output. The timing experiments use three warmup batches and seven measured trials. Q3 repeats its correctness observations seven times.
 
-Every Output.png is a lossless 1920 x 1080 PNG captured at the desktop's native resolution. Read two-column outputs down the left column, then down the right column. The captures preserve the original output text without JPEG compression or image enlargement.
-
 Programs save detailed raw trials, summaries and supplementary output locally under docs/evidence/TaskNN, outside the task folders. This directory is ignored by Git. Use -Dassignment.evidence=PATH before the Java source filename to choose a different local evidence directory.
 
 The Word/PDF reports, raw evidence, previous screenshots, report-authoring scripts and compiler logs are kept locally. New timings can differ due to JVM compilation, garbage collection and system activity.
