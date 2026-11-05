@@ -1,0 +1,20 @@
+java -Xms256m -Xmx1g -cp build/Task01 TicketExperiment
+Q1 Ticket construction
+Prediction before timing: repeated + copies growing prefixes; builders grow amortized linearly.
+Java 21.0.12.1 | Windows 11 | amd64
+Warmups=3; measured trials=7; heap is sampled without forced GC.
+Workload 1 tickets x 8 fields; 2000 batching repetitions; 144 chars/ticket
+n=8      String          1tickets         mean=     552.04 ns/op sd=    489.43
+n=8      StringBuilder   1tickets         mean=     864.53 ns/op sd=    343.00
+n=8      StringBuffer    1tickets         mean=     844.03 ns/op sd=    314.32
+Workload 10000 tickets x 50 fields; 1 batching repetitions; 900 chars/ticket
+n=50     String          10000tickets     mean=    4790.45 ns/op sd=    589.39
+n=50     StringBuilder   10000tickets     mean=     622.41 ns/op sd=     40.73
+n=50     StringBuffer    10000tickets     mean=    2114.14 ns/op sd=     55.80
+Workload 100 tickets x 200 fields; 1 batching repetitions; 3600 chars/ticket
+n=200    String          100tickets       mean=   67299.71 ns/op sd=   7211.55
+n=200    StringBuilder   100tickets       mean=    2401.86 ns/op sd=     76.06
+n=200    StringBuffer    100tickets       mean=    9550.57 ns/op sd=    904.98
+PASS: all ticket texts equal; String.join and StringJoiner equal; shared log has 4000 intact records.
+Use thread-confined StringBuilder per ticket; StringBuffer.append(completeRecord) for a shared log.
+

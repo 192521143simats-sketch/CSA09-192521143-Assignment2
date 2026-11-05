@@ -1,0 +1,4 @@
+tickets,fields,batches,characters_per_ticket,plus_string_results_per_ticket,plus_characters_copied,builder_appended_characters
+1,8,2000,144,8,648,144
+10000,50,1,900,50,22950,900
+100,200,1,3600,200,361800,3600
