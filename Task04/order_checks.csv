@@ -1,0 +1,10 @@
+size,structure,code_order_ok,insertion_order_ok
+100,HashMap,true,true
+100,TreeMap,true,true
+100,LinkedHashMap,true,true
+10000,HashMap,true,true
+10000,TreeMap,true,true
+10000,LinkedHashMap,true,true
+100000,HashMap,true,true
+100000,TreeMap,true,true
+100000,LinkedHashMap,true,true

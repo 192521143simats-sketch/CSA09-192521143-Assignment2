@@ -1,0 +1,49 @@
+java -Xms256m -Xmx1g -cp build/Task04 InventoryExperiment
+Q4 Pharmacy maps
+Prediction: hash lookups average O(1); tree lookups O(log n); wrong-order reports require O(n log n) sorting.
+Acceptance criterion declared before timing: mean collection lookup below 10000 ns (10 microseconds).
+Java 21.0.12.1 | Windows 11 | amd64
+Warmups=3; measured trials=7; heap is sampled without forced GC.
+n=100    HashMap         put              mean=     264.29 ns/op sd=     80.73
+n=100    HashMap         100000-lookups   mean=      16.88 ns/op sd=      6.00
+n=100    HashMap         code-report      mean=  224114.29 ns/op sd=  49898.91
+n=100    HashMap         insertion-report mean=  200228.57 ns/op sd= 190022.91
+n=100    TreeMap         put              mean=    1535.00 ns/op sd=    978.39
+n=100    TreeMap         100000-lookups   mean=      89.90 ns/op sd=     31.54
+n=100    TreeMap         code-report      mean=   46171.43 ns/op sd=  11455.52
+n=100    TreeMap         insertion-report mean=  108185.71 ns/op sd=  13001.72
+n=100    LinkedHashMap   put              mean=     667.71 ns/op sd=    221.15
+n=100    LinkedHashMap   100000-lookups   mean=      24.63 ns/op sd=     20.62
+n=100    LinkedHashMap   code-report      mean=  130514.29 ns/op sd=  43897.74
+n=100    LinkedHashMap   insertion-report mean=   47814.29 ns/op sd=   4954.94
+n=100    SortedArray     100000-lookups   mean=      78.21 ns/op sd=     16.96
+PASS n=100: all report orders, missing-key check and binary-search positions correct.
+n=10000  HashMap         put              mean=     229.14 ns/op sd=    190.63
+n=10000  HashMap         100000-lookups   mean=      52.69 ns/op sd=     31.58
+n=10000  HashMap         code-report      mean=15298400.00 ns/op sd=9334841.59
+n=10000  HashMap         insertion-report mean= 3933828.57 ns/op sd=1557290.71
+n=10000  TreeMap         put              mean=     410.94 ns/op sd=    131.85
+n=10000  TreeMap         100000-lookups   mean=     238.58 ns/op sd=     21.54
+n=10000  TreeMap         code-report      mean=  641614.29 ns/op sd= 300254.69
+n=10000  TreeMap         insertion-report mean= 2935028.57 ns/op sd= 664655.58
+n=10000  LinkedHashMap   put              mean=      54.17 ns/op sd=     15.70
+n=10000  LinkedHashMap   100000-lookups   mean=      19.90 ns/op sd=      5.89
+n=10000  LinkedHashMap   code-report      mean= 3142857.14 ns/op sd= 449981.87
+n=10000  LinkedHashMap   insertion-report mean=  612214.29 ns/op sd= 407150.56
+n=10000  SortedArray     100000-lookups   mean=     176.70 ns/op sd=      8.73
+PASS n=10000: all report orders, missing-key check and binary-search positions correct.
+n=100000 HashMap         put              mean=     115.78 ns/op sd=     28.57
+n=100000 HashMap         100000-lookups   mean=      98.09 ns/op sd=     21.54
+n=100000 HashMap         code-report      mean=81712242.86 ns/op sd=43581684.39
+n=100000 HashMap         insertion-report mean=39223814.29 ns/op sd=4246919.90
+n=100000 TreeMap         put              mean=     740.23 ns/op sd=    208.33
+n=100000 TreeMap         100000-lookups   mean=    1125.61 ns/op sd=    537.80
+n=100000 TreeMap         code-report      mean=20121042.86 ns/op sd=3847643.11
+n=100000 TreeMap         insertion-report mean=39750642.86 ns/op sd=4842288.24
+n=100000 LinkedHashMap   put              mean=      96.20 ns/op sd=     14.65
+n=100000 LinkedHashMap   100000-lookups   mean=     174.09 ns/op sd=    153.41
+n=100000 LinkedHashMap   code-report      mean=44897314.29 ns/op sd=5146704.68
+n=100000 LinkedHashMap   insertion-report mean=10504557.14 ns/op sd=15054884.72
+n=100000 SortedArray     100000-lookups   mean=     457.16 ns/op sd=     33.49
+PASS n=100000: all report orders, missing-key check and binary-search positions correct.
+
