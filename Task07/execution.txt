@@ -1,0 +1,28 @@
+java -Xms256m -Xmx1g -cp build/Task07 RankingRedesign
+Q7 Redesign repeated leaderboard queries
+Diagnosis from Q5: every ranking copies and sorts the same unchanged data again.
+Prediction before validation: 30 read-only requests reduce sorts 30->1; update-every-10 reduces 30->3.
+Objective: at least 90% fewer sorts and 2x lower mean ns/request for read-only n>=1000.
+Counterprediction: update-before-every-request gets no sort saving and may be slower.
+Java 21.0.12.1 | Windows 11 | amd64
+Warmups=3; measured trials=7; heap is sampled without forced GC.
+n=100    Original        updateEvery0     mean=   61628.10 ns/op sd=  72160.51
+n=100    Cached          updateEvery0     mean=   33410.95 ns/op sd=  53865.40
+n=100    Original        updateEvery10    mean=   22659.05 ns/op sd=  14835.59
+n=100    Cached          updateEvery10    mean=    3712.86 ns/op sd=    665.35
+n=100    Original        updateEvery1     mean=   19784.76 ns/op sd=   1973.08
+n=100    Cached          updateEvery1     mean=   22920.48 ns/op sd=   4136.13
+n=1000   Original        updateEvery0     mean=  396512.38 ns/op sd=  83530.02
+n=1000   Cached          updateEvery0     mean=   64786.67 ns/op sd=  46046.66
+n=1000   Original        updateEvery10    mean=  267298.10 ns/op sd=  27575.89
+n=1000   Cached          updateEvery10    mean=   27584.29 ns/op sd=    779.83
+n=1000   Original        updateEvery1     mean=  266079.52 ns/op sd=  33123.80
+n=1000   Cached          updateEvery1     mean=  247663.81 ns/op sd=  20251.59
+n=10000  Original        updateEvery0     mean=15268285.24 ns/op sd=13784464.10
+n=10000  Cached          updateEvery0     mean=  354902.86 ns/op sd= 282376.22
+n=10000  Original        updateEvery10    mean=13798526.19 ns/op sd=17682713.17
+n=10000  Cached          updateEvery10    mean=  817918.10 ns/op sd= 203727.84
+n=10000  Original        updateEvery1     mean=17646922.38 ns/op sd=17068574.84
+n=10000  Cached          updateEvery1     mean= 8222612.38 ns/op sd=3747430.30
+PASS: all requests equal original; invalidation counts match; empty and isolated mutable snapshots verified.
+
