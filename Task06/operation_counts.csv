@@ -1,0 +1,4 @@
+size,admit_comparisons,serve_comparisons,single_critical_admit_comparisons
+100,164,837,6
+10000,18153,216496,13
+50000,90746,1314833,15

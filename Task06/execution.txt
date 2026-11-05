@@ -1,0 +1,22 @@
+java -Xms256m -Xmx1g -cp build/Task06 Triage
+Meena(S1) Kumar(S1) Lata(S2) Ravi(S3) John(S3) Asha(S5)
+
+java -Xms256m -Xmx1g -cp build/Task06 TriageExperiment
+Q6 Triage queue
+Prediction before timing: heap admit and next are O(log n); a full drain is O(n log n).
+Hand order: Meena Kumar Lata Omar Ravi John Priya Asha
+Heap storage iteration (not treatment order): [Meena(S1), Kumar(S1), Lata(S2), Omar(S2), Ravi(S3), John(S3), Priya(S4), Asha(S5)]
+Observed treatment order: Meena Kumar Lata Omar Ravi John Priya Asha
+Separate heap iteration witness: [W0(S1), W1(S4), W2(S2), W3(S5), W4(S4), W5(S3), W6(S2), W7(S5)]
+Aging simulation at minute 120: OldMinor reaches effective severity 1 and precedes NewCritical by arrival.
+Java 21.0.12.1 | Windows 11 | amd64
+Warmups=3; measured trials=7; heap is sampled without forced GC.
+n=100    PriorityQueue   admit            mean=     806.57 ns/op sd=   1023.29
+n=100    PriorityQueue   serve            mean=    1541.86 ns/op sd=   2887.42
+n=10000  PriorityQueue   admit            mean=     203.50 ns/op sd=    300.99
+n=10000  PriorityQueue   serve            mean=     245.74 ns/op sd=     37.65
+n=50000  PriorityQueue   admit            mean=      74.29 ns/op sd=     31.50
+n=50000  PriorityQueue   serve            mean=    1120.32 ns/op sd=    636.51
+PASS: invalid severity rejected; empty poll returns null.
+PASS: hand order, FIFO ties, display snapshot, both alternative queues and aging rule.
+
