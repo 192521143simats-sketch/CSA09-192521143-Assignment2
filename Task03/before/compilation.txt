@@ -1,4 +1,0 @@
-C:\Users\mahen\OneDrive\Desktop\SARVESH\simats\SIMATS PROJECT\JAVA\ASSIGNMENT 2\Task03\before\Attendance.java:4: warning: [overrides] Class Student overrides equals, but neither it nor any superclass overrides hashCode method
-class Student {
-^
-1 warning

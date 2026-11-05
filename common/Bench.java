@@ -17,13 +17,13 @@ public final class Bench implements AutoCloseable {
     public Bench() throws IOException {
         Locale.setDefault(Locale.US);
         Properties settings = new Properties();
-        try (var input = Files.newInputStream(Path.of("input.properties"))) {
+        try (var input = Files.newInputStream(Path.of("inputs", "input.properties"))) {
             settings.load(input);
         }
         warmups = Integer.parseInt(settings.getProperty("warmups", "3"));
         repeats = Integer.parseInt(settings.getProperty("repeats", "7"));
-        raw = new PrintWriter("raw.csv");
-        summary = new PrintWriter("summary.csv");
+        raw = new PrintWriter("results/raw.csv");
+        summary = new PrintWriter("results/summary.csv");
         raw.println("size,structure,operation,trial,total_ns,operations,ns_per_op,heap_before_bytes,heap_after_bytes,checksum");
         summary.println("size,structure,operation,operations,mean_ns_per_op,sd_ns_per_op,min_ns_per_op,max_ns_per_op");
         System.out.printf("Java %s | %s | %s%n", System.getProperty("java.version"),

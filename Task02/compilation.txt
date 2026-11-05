@@ -1,1 +1,0 @@
-Compilation successful with --release 17 and -Xlint:all.

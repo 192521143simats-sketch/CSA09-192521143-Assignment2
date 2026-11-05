@@ -4,89 +4,68 @@ Name: R SARVESH
 
 Register number: 192521143
 
+Java version used: Oracle JDK 21.0.12.1 on Windows 11, compiled for Java 17.
+
 Repository: https://github.com/192521143simats-sketch/CSA09-192521143-Assignment2
 
-Java used: Oracle JDK 21.0.12.1 on Windows 11 amd64, compiled with `--release 17`. A JDK 17 or later is required. Java programs have no external dependencies.
+## Submission structure
 
-## Tasks and recorded results
+Every task uses the same structure.
 
-| Task | Entry points | Result |
-| --- | --- | --- |
-| Q1 | TicketExperiment | Three text-building methods produced equal tickets. At 50 fields, StringBuilder averaged 622.41 ns/ticket and repeated + 4790.45 ns/ticket. The shared log retained 4000 complete records. |
-| Q2 | PlaylistExperiment | Three playlist sizes exposed the cost of array shifting and linked-list indexed traversal. All edit-order, iteration and Up Next checks passed. |
-| Q3 | Attendance, AttendanceExperiment | The supplied program reported 3 students before the correction and 2 afterward. Reused references, deliberately distinct hashes, mutation and alternative structures were tested. |
-| Q4 | InventoryExperiment | All map reports matched both required orders at three sizes. All tested maps met the predeclared mean lookup criterion. |
-| Q5 | LeaderboardDemo, RankingExperiment | The expected ranking matched exactly. Overflow and incomplete tie-breakers were detected. Comparator, Comparable and stable-sort alternatives agreed. |
-| Q6 | Triage, TriageExperiment | The supplied treatment order matched exactly. Eight-patient hand ordering, FIFO ties, growth counts, alternative queues and aging checks passed. |
-| Q7 | RankingRedesign | All cached results matched the original. Unchanged data reduced 30 sorts to 1, while updates invalidated the cache correctly. |
+```text
+Task01/ ... Task07/
+    src/            Java source code
+    inputs/         Input data and experiment settings
+    results/        Actual stdout, raw trials, summaries and operation counts
+    screenshots/    Genuine output screenshots
 
-## Structure
+common/Bench.java   Shared measurement code
+tools/              Compile-and-run scripts
+```
 
-Each `Task01` through `Task07` contains its Java sources, deterministic input files, `Answer.md`, `execution.txt`, `raw.csv`, and genuine output screenshots named `Output_PageNN.png`. Timing tasks also contain `summary.csv` with mean, sample standard deviation, minimum and maximum. Additional operation counts and correctness records are stored beside the sources. Task03 includes the original uncorrected program in `before/`.
+Task03 additionally keeps the uncorrected supplied program in `src/before/` and its actual output in `results/before_execution.txt`.
 
-`common/Bench.java` provides the same measurement method for all timing tasks. It performs three warmup batches followed by seven recorded trials. Preparation happens outside the timer. A volatile checksum consumes timed results. Heap readings are sampled without forcing garbage collection. They are used-heap observations and do not count total allocations. Each task's answer states its operation unit and limitations.
+## Compile and run
 
-`common/EvidenceViewer.java` displays the actual saved program stdout in numbered pages. The PNGs are native Windows screenshots of that viewer. It labels the source as saved stdout. The text comes from actual Java executions recorded in `execution.txt`, and the raw trials remain available for independent checking. Screenshots are supporting evidence alongside repeated measurements and operation counts.
+Install a JDK version 17 or later. No Java libraries or build-tool installation are required. Open PowerShell in the repository root.
 
-The local `docs/` folder holds the DOCX, PDF and their rendering tools. That folder and all DOCX/PDF files are ignored by Git, as requested.
-
-## Compile and execute every task
-
-From the repository root in PowerShell, run
+Run all tasks, including every supplied Complete the Code program and the uncorrected Q3 program.
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\tools\Run-All.ps1
 ```
 
-This compiles every task independently and runs all 10 main entry points, plus the before-correction Attendance program. It recreates raw data and execution transcripts. New measurements will differ from this recorded run. Refresh the answer tables, reports and screenshots when adopting a new set of results.
+Run an individual task with the corresponding command.
 
-To compile and run an individual task, use its entry points from the task table.
+| Task | Compile and run command | Result of recorded execution |
+| --- | --- | --- |
+| Q1 | `.\tools\Run-Task.ps1 -Task 1 -Programs TicketExperiment` | All three methods produced equal tickets across three workloads. The four-thread log retained all 4,000 records. |
+| Q2 | `.\tools\Run-Task.ps1 -Task 2 -Programs PlaylistExperiment` | Three playlist sizes tested append, front/middle edits, indexed access, iteration and Up Next. Order and checksum checks passed. |
+| Q3 | `.\tools\Run-Task.ps1 -Task 3 -Programs Attendance,AttendanceExperiment` | The supplied code produced 3 students before correction and 2 afterward. All seven repetitions of the five designed observations matched their predictions. |
+| Q4 | `.\tools\Run-Task.ps1 -Task 4 -Programs InventoryExperiment` | All nine map/size combinations produced correct code-order and addition-order reports. Each map met the declared mean lookup target. |
+| Q5 | `.\tools\Run-Task.ps1 -Task 5 -Programs LeaderboardDemo,RankingExperiment` | The supplied expected ranking matched exactly. Overflow and omitted tie-breaker faults were detected. All three ranking alternatives agreed. |
+| Q6 | `.\tools\Run-Task.ps1 -Task 6 -Programs Triage,TriageExperiment` | The supplied treatment order and eight-patient hand order matched. FIFO ties, growth, aging and both alternative queues passed their checks. |
+| Q7 | `.\tools\Run-Task.ps1 -Task 7 -Programs RankingRedesign` | Cached rankings matched the original for every request. Unchanged data reduced 30 sorts to 1, and additions invalidated the cache correctly. |
 
-```powershell
-.\tools\Run-Task.ps1 -Task 1 -Programs TicketExperiment
-.\tools\Run-Task.ps1 -Task 2 -Programs PlaylistExperiment
-.\tools\Run-Task.ps1 -Task 3 -Programs Attendance,AttendanceExperiment
-.\tools\Run-Task.ps1 -Task 4 -Programs InventoryExperiment
-.\tools\Run-Task.ps1 -Task 5 -Programs LeaderboardDemo,RankingExperiment
-.\tools\Run-Task.ps1 -Task 6 -Programs Triage,TriageExperiment
-.\tools\Run-Task.ps1 -Task 7 -Programs RankingRedesign
-```
-
-For a manual example, compile Q5 from the repository root and run from its task folder so its input paths resolve.
+For a manual compile-and-run example, run Q5 as follows.
 
 ```powershell
 New-Item -ItemType Directory -Force build\Task05 | Out-Null
-javac --release 17 -d build\Task05 common\Bench.java Task05\*.java
+javac --release 17 -d build\Task05 common\Bench.java Task05\src\*.java
 Push-Location Task05
 java -Xms256m -Xmx1g -cp ..\build\Task05 LeaderboardDemo
 java -Xms256m -Xmx1g -cp ..\build\Task05 RankingExperiment
 Pop-Location
 ```
 
-Task03's intentional broken equals/hashCode classes produce expected compiler warnings. Q5's supplied package-private classes produce auxiliary-class warnings when reused by its experiment. Successful compilation does not imply an absence of these deliberately retained warnings.
+All other tasks use the same pattern with their task number and entry points from the table. Run from the task folder so that `inputs/` and `results/` resolve correctly. Q3's before-correction example has a separate compilation directory because it intentionally uses the same class names as the corrected program. Run-All.ps1 handles that separation.
 
-## View an output transcript
+## Experimental evidence
 
-```powershell
-New-Item -ItemType Directory -Force build\viewer | Out-Null
-javac --release 17 -d build\viewer common\EvidenceViewer.java
-java -cp build\viewer EvidenceViewer Task02\execution.txt 1
-```
+The timing experiments use three warmup batches followed by seven measured trials. `results/raw.csv` retains each trial, elapsed nanoseconds, operation count, checksum and heap readings. `results/summary.csv` records mean, sample standard deviation, minimum and maximum. Q3 instead records the predicted and observed outcomes of its correctness experiments.
 
-The last argument chooses the initially selected page. Every screenshot page is saved in the corresponding task folder.
+Operation counts and additional order/correctness checks are retained where required. The submission contains 819 measured timing trials and 10 output screenshots across Q1-Q7. Screenshots show actual saved Java output displayed in a labelled output viewer. Raw data and text output provide the complete execution evidence.
 
-## Verify the submission
+Rerunning the experiments regenerates result files. Timing depends on the JVM, garbage collection and system activity, so a new run can produce different values. Heap differences do not measure total allocated bytes. Use the repeated trials and operation counts when interpreting results.
 
-Python 3 with Pillow is required only for the evidence-verification helper. Run
-
-```powershell
-python tools\Verify-Submission.py
-```
-
-This recompiles every source, checks the supplied program outputs, validates seven-trial statistics and cross-implementation checksums, confirms task evidence and screenshot coverage, and checks Git tracking for excluded documents. It does not overwrite the saved benchmark measurements. The recorded result is in `verification.txt`.
-
-## History and measurement scope
-
-The history contains seven actual task-completion commits followed by verification and reproducibility changes. Commit timestamps represent the real work performed. No historical student activity is reconstructed.
-
-Measurements describe this machine and these generated inputs. Fixed method order, JIT compilation, garbage collection and other system activity can influence timing. Mean and sample deviation are reported together, with deterministic operation counts used where available. Detailed comparisons, Big-O analysis, predictions and engineering decisions are in each task's `Answer.md`. The programs and evidence should be reviewed and understood before an assessment discussion.
+The Git history retains a separate completion commit for each task. The DOCX/PDF reports, report-authoring tools, compiler logs and verification helpers are kept locally and excluded from this submission repository. Compiled classes and temporary build files are also ignored.

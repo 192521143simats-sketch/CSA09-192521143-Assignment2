@@ -3,3 +3,5 @@ docs/
 *.class
 *.docx
 *.pdf
+Task*/Answer.md
+verification.txt
