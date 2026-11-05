@@ -5,3 +5,4 @@ docs/
 *.pdf
 Task*/Answer.md
 verification.txt
+Task*/results/execution.txt
